@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Tela Autenticação</title>
+	<h:outputStylesheet library="css" name="estilos.css" />
+</h:head>
+<h:body>
+	<p:growl id="mensagem" />
+
+	<p:dialog header="Autenticação" closable="false" draggable="false"
+		resizable="false" modal="true" visible="true">
+		<h:form>
+		
+		<p:panelGrid>
+		<p:graphicImage library="images" name="banner1.jpg" width="300px"
+				height="100px" styleClass="imagemCentralizada" />
+		</p:panelGrid>
+			<h:panelGrid columns="2">
+				<p:outputLabel for="user" value="User:" />
+				<p:inputText id="user" maxlength="8" size="10" required="true"
+					requiredMessage="Maximo de 8 caracteres"
+					value="#{autenticacaoBean.usuario.user}" />
+
+				<p:outputLabel for="senha" value="Senha:" />
+				<p:password id="senha" maxlength="8" size="10" required="true"
+					requiredMessage="Maximo de 8 caracteres" 
+					value="#{autenticacaoBean.usuario.senha}"/>
+			</h:panelGrid>
+
+			<p:panelGrid columns="2">
+				<p:commandButton value="Entrar" icon="ui-icon-refresh"
+					update=":mensagem" actionListener="#{autenticacaoBean.autenticar}"/>
+				<p:commandButton value="Esqueceu Senha" icon="ui-icon-help" />
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>SISTEMA REGISTRO</title>
+	<h:outputStylesheet library="css" name="estilos.css" />
+</h:head>
+<h:body>
+
+	<!-- MENSAGEM DO FACESMENSAGEM -->
+	<p:growl id="mensagem" />
+
+
+	<div id="geral">
+		<div id="topo" class="divTopo">
+			<p:graphicImage library="images" name="banner2.png" width="300px"
+				height="100px" styleClass="imagemCentralizada" />
+		</div>
+
+		<div id="cabecalho" class="divCabecalho">
+			<h:form id="formMenu">
+				<p:menubar>
+					<p:submenu label="Arquivo" icon="ui-icon-home">
+						<p:menuitem value="Sair" action="#{autenticacaoBean.sair}" />
+					</p:submenu>
+
+					<p:submenu label="Cadastros" icon=" ui-icon-circle-plus"
+						rendered="#{autenticacaoBean.temPermissoes(['A','G','B'])}">
+						<p:menuitem value="Estados" action="/pages/estados.xhtml"
+							rendered="#{autenticacaoBean.temPermissoes(['A'])}" />
+						<p:menuitem value="Registros" action="/pages/registros.xhtml" />
+						<p:menuitem value="Usuarios" action="/pages/usuarios.xhtml"
+							rendered="#{autenticacaoBean.temPermissoes(['A'])}" />		
+						<p:menuitem value="Emprestimos" action="/pages/emprestimos.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Relatorio" icon="ui-icon-print"
+						rendered="#{autenticacaoBean.temPermissoes(['A','G'])}">
+						<p:menuitem value="Registros" action="/pages/relatorios.xhtml" />
+						<p:menuitem value="Usuarios" />
+					</p:submenu>
+
+					<p:submenu label="Ajuda" icon="ui-icon-help">
+						<p:menuitem value="Sobre" />
+					</p:submenu>
+
+					<f:facet name="options">
+						<p:outputLabel style="margin:1px 10px 1px 1px;" value="Logado:"/>
+						<p:commandButton  value="#{autenticacaoBean.usuarioLogado.user}" action="#{autenticacaoBean.sair}"/>
+					</f:facet>
+
+				</p:menubar>
+
+				<!--
+					<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search"/>
+					<p:commandButton type="button" value="#{autenticacaoBean.usuarioLogado.user}" icon="pi pi-home" />
+					  -->
+
+			</h:form>
+		</div>
+
+
+		<div id="conteudo">
+			<ui:insert name="conteudo" />
+		</div>
+	</div>
+
+</h:body>
+</html>

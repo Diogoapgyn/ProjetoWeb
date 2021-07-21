@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="registro" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="43b90771-88f7-4270-91d2-2c5192f89578">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="323"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="664"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Projeto Data Adapter "/>
+	<parameter name="REGISTRO_ENTRADA" class="java.sql.Timestamp"/>
+	<parameter name="REGISTRO_SAIDA" class="java.sql.Timestamp"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT projetoweb.registro.cartao,
+	projetoweb.registro.entrada,
+	projetoweb.registro.matricula,
+	projetoweb.registro.placa,
+	projetoweb.registro.saida
+FROM projetoweb.registro
+WHERE 
+	 projetoweb.registro.entrada BETWEEN $P{REGISTRO_ENTRADA} AND $P{REGISTRO_SAIDA} 
+ORDER BY projetoweb.registro.entrada DESC]]>
+	</queryString>
+	<field name="cartao" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="cartao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="registro"/>
+	</field>
+	<field name="entrada" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="entrada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="registro"/>
+	</field>
+	<field name="matricula" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="matricula"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="registro"/>
+	</field>
+	<field name="placa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="placa"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="registro"/>
+	</field>
+	<field name="saida" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="saida"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="registro"/>
+	</field>
+	<title>
+		<band height="45" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="61" y="0" width="449" height="30" uuid="22b2c01d-3ea2-4385-b327-54bf7bba806f"/>
+				<textElement>
+					<font fontName="Arial Black" size="20" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RELATORIOS DO ESTACIONAMENTO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="70" height="20" uuid="87d634e7-a6e8-47cc-bdde-0b4ad8dee4cb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="16dc5b67-737e-4435-8e60-c5d47217739b"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[CARTAO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="eb21daa8-f06f-4836-a02b-5ed60db8422d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7684f076-8b5a-43fe-9207-e2339ab71a21"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[MATRICULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="0" width="80" height="20" uuid="92aeb732-8ebb-4dd8-92af-d095a14e7da9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef3f30c4-22fc-4586-93fe-3c2d5cf7228b"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[PLACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="100" height="20" uuid="220e7c6e-90a2-4276-a4ea-827a1c2b11c6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fb8c1586-b04f-49aa-898e-0b342b226d3a"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[ENTRADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="100" height="20" uuid="9746e3e0-88b4-41da-a0bd-64f02e7e49a6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="18a928ea-4566-405d-aa0a-cff67beeb6f3"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[SAIDA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="30" y="0" width="70" height="20" uuid="04895470-6864-4f56-837c-59412eb730e1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="16dc5b67-737e-4435-8e60-c5d47217739b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cartao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="0" width="80" height="20" uuid="7fd0a571-076d-4d5a-aa40-6731eca92798">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7684f076-8b5a-43fe-9207-e2339ab71a21"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="100" height="20" uuid="1c7089de-eaa0-49e3-82f0-2a9d250fbf0e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef3f30c4-22fc-4586-93fe-3c2d5cf7228b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="323" y="0" width="100" height="20" uuid="771238df-b223-46d8-b85b-145394acaf71">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fb8c1586-b04f-49aa-898e-0b342b226d3a"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="100" height="20" uuid="6b946d95-e1d1-4cc8-8f8a-db393cbfca72">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="18a928ea-4566-405d-aa0a-cff67beeb6f3"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{saida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

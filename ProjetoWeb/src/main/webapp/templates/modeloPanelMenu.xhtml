@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>SISTEMA REGISTRO</title>
+	<h:outputStylesheet library="css" name="estilos.css" />
+</h:head>
+<h:body>
+
+	<!-- MENSAGEM DO FACESMENSAGEM -->
+	<p:growl id="mensagem" />
+
+
+	<div id="geral">
+		<div id="topo" class="divTopo">
+			<p:graphicImage library="images" name="banner2.png" width="300px"
+				height="100px" styleClass="imagemCentralizada" />
+		</div>
+
+		<div id="cabecalho" class="divCabecalho">
+			<h:form id="formMenu">
+				<p:panelMenu style="width:150px">
+					<p:submenu label="HOME">
+						<p:menuitem value="Save" action="#{menuView.save}"
+							icon="pi pi-save" />
+						<p:menuitem value="Update" action="#{menuView.update}"
+							icon="pi pi-refresh" />
+					</p:submenu>
+					<p:submenu label="CADASTROS">
+						<p:menuitem value="Estados" action="/pages/estados.xhtml"
+							ajax="false" icon="pi pi-times" />
+						<p:menuitem value="Registros" action="#{menuView.delete}"
+							ajax="false" icon="pi pi-times" />
+						<p:menuitem value="Usuarios" action="#{menuView.delete}"
+							ajax="false" icon="pi pi-times" />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="RELATORIOS">
+						<p:submenu label="Links" icon="pi pi-home">
+							<p:submenu label="PrimeFaces" icon="pi pi-briefcase">
+								<p:menuitem value="Home" url="http://www.primefaces.org"
+									icon="pi pi-home" />
+								<p:menuitem value="Docs"
+									url="http://www.primefaces.org/documentation" icon="pi pi-file" />
+								<p:menuitem value="Download"
+									url="http://www.primefaces.org/downloads"
+									icon="pi pi-arrow-down" />
+								<p:menuitem value="Support"
+									url="http://www.primefaces.org/support" icon="pi pi-briefcase" />
+							</p:submenu>
+						</p:submenu>
+						<p:menuitem value="Mobile" icon="pi pi-mobile" />
+					</p:submenu>
+				</p:panelMenu>
+			</h:form>
+		</div>
+
+
+		<div class="container">
+			<ui:insert name="conteudo" />
+		</div>
+	</div>
+
+</h:body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+	
+		<ui:define name="conteudo">
+
+		<h:form>
+			<p:panel header="LISTAGEM - ESTADOS">
+				<p:dataTable emptyMessage="Nenhum registro Encontrado"
+					paginator="true" value="#{estadoBean.estados}" var="listEstado"
+					rows="14">
+
+					<f:facet name="footer">
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+							actionListener="#{estadoBean.novo()}" update=":formCadastro:pnl" />
+					</f:facet>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{listEstado.nome}" />
+					</p:column>
+
+					<p:column headerText="Sigla">
+						<h:outputText value="#{listEstado.sigla}" />
+					</p:column>
+
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash" />
+					</p:column>
+
+					<p:confirmDialog>
+
+					</p:confirmDialog>
+
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<p:dialog header="Cadastro de Estado" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true">
+			<h:form id="formCadastro">
+				<p:panelGrid id="pnl" columns="2">
+					<p:outputLabel value="Nome:" />
+					<p:inputText maxlength="50" size="30"
+						value="#{estadoBean.estado.nome}" />
+
+					<p:outputLabel value="Sigla:" />
+					<p:inputText maxlength="2" size="10"
+						value="#{estadoBean.estado.sigla}" />
+				</p:panelGrid>
+
+				<p:panelGrid>
+					<p:commandButton value="Salvar"
+						actionListener="#{estadoBean.salvar}"
+						update=":mensagem :formCadastro:pnl" />
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

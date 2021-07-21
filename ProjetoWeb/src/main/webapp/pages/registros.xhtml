@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:form id="formListagem">
+			<p:panel id="pnlDatatable" header="LISTAGEM - REGISTROS">
+				<p:dataTable emptyMessage="Nenhum registro Encontrado"
+					paginator="true" value="#{registroBean.registros}"
+					var="listaRegistro" rows="9" paginatorPosition="top">
+
+					<f:facet name="header">
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+							actionListener="#{registroBean.novo}" update=":formCadastro:pnl" />
+					</f:facet>
+
+					<p:column headerText="Cartão">
+						<h:outputText value="#{listaRegistro.cartao}" />
+					</p:column>
+
+					<!-- Sortby traz ordenação,usar quando for gravar -->
+					<p:column headerText="Matricula">
+						<h:outputText value="#{listaRegistro.matricula}" />
+					</p:column>
+
+					<p:column headerText="Placa">
+						<h:outputText value="#{listaRegistro.placa}" />
+					</p:column>
+
+					<p:column headerText="Entrada">
+						<h:outputText value="#{listaRegistro.entrada}" />
+					</p:column>
+
+					<p:column headerText="Saida">
+						<h:outputText value="#{listaRegistro.saida}" />
+					</p:column>
+
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{registroBean.excluir}"
+							rendered="#{autenticacaoBean.temPermissoes(['A','G'])}"
+							update=":mensagem :formListagem:pnlDatatable">
+							<p:confirm header="Confirmação"
+								message="Deseja realmente excluir?" icon="ui-icon-alert" />
+							<f:attribute name="registroSelecionado" value="#{listaRegistro}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{registroBean.editar}"
+							update=":formCadastro:pnl" oncomplete="PF('dialogo').show();">
+							<f:attribute name="registroSelecionado" value="#{listaRegistro}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+			</p:panel>
+		</h:form>
+
+		<p:dialog header="Registro de Veiculos" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true" >
+			<h:form id="formCadastro">
+				<p:panelGrid id="pnl" columns="2">
+				
+					<p:outputLabel value="Cartão:" />
+					<p:inputText maxlength="50" size="5"
+						value="#{registroBean.registro.cartao}" required="true"
+						requiredMessage="Campo 'Cartão' é obrigatorio" />
+
+					<p:outputLabel value="Matricula:" />
+					<p:inputMask maxlength="11" size="10"
+						value="#{registroBean.registro.matricula}" required="true"
+						requiredMessage="Campo 'Matricula' é obrigatorio"
+						mask="99999999999" placeholder="02980000000" />
+
+					<p:outputLabel value="Placa:" />
+					<p:inputMask maxlength="11" size="10"
+						value="#{registroBean.registro.placa}" required="true"
+						requiredMessage="Campo 'Placa' é obrigatorio" mask="aaa-9999"
+						placeholder="XYZ-1234" />
+
+					<p:outputLabel value="Entrada:" />
+					<p:datePicker value="#{registroBean.registro.entrada}"
+						showTime="true" pattern="dd.MM.yyyy" required="true" />
+
+					<p:outputLabel id="outputSaida" value="Saida:" />
+					<p:datePicker value="#{registroBean.registro.saida}"
+						showTime="true" pattern="dd.MM.yyyy"
+						disabled="#{registroBean.registro.codigo==null}" />
+
+
+				</p:panelGrid>
+
+				<p:panelGrid>
+					<p:commandButton value="Salvar"
+						actionListener="#{registroBean.salvar()}"
+						update=":mensagem :formCadastro:pnl :formListagem:pnlDatatable" />
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		</ui:define>
+</ui:composition>

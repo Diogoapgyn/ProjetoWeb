@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:form id="formListagem">
+			<p:panel id="pnlDatatable" header="REGISTROS ESTACIONAMENTO">
+				<p:dataTable emptyMessage="Nenhum registro Encontrado"
+					 value="#{registroBean.registros}"
+					var="listaRegistro">
+
+					<f:facet name="header" />
+						
+					<p:column headerText="Cartão">
+						<h:outputText value="#{listaRegistro.cartao}" />
+					</p:column>
+
+					<!-- Sortby traz ordenação,usar quando for gravar -->
+					<p:column headerText="Matricula">
+						<h:outputText value="#{listaRegistro.matricula}" />
+					</p:column>
+
+					<p:column headerText="Placa">
+						<h:outputText value="#{listaRegistro.placa}" />
+					</p:column>
+
+					<p:column headerText="Entrada">
+						<h:outputText value="#{listaRegistro.entrada}" />
+					</p:column>
+
+					<p:column headerText="Saida">
+						<h:outputText value="#{listaRegistro.saida}" />
+					</p:column>
+
+					<p:column headerText="Opções">
+						<p:commandButton value="RELATORIO" icon="ui-icon-print" oncomplete="PF('dialogo').show();"
+							actionListener="#{registroBean.novo}" update=":formCadastro:pnl" />
+
+						
+					</p:column>
+
+				</p:dataTable>
+
+
+			</p:panel>
+		</h:form>
+
+		<p:dialog header="RELATÓRIO DO ESTACIONAMENTO" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true">
+			<h:form id="formCadastro">
+				<p:panelGrid id="pnl" columns="2">
+				
+					<p:outputLabel value="Entrada:" />
+					<p:calendar value="#{registroBean.registro.entrada}"
+						showTime="true" pattern="dd.MM.yyyy" required="true" />
+
+					<p:outputLabel value="Saida:" />
+					<p:calendar value="#{registroBean.registro.saida}"
+						showTime="true" pattern="dd.MM.yyyy" />
+
+
+				</p:panelGrid>
+
+				<p:panelGrid>
+					<p:commandButton value="GERAR" icon="ui-icon-print"
+						actionListener="#{registroBean.imprimir}"
+						update=":mensagem :formCadastro:pnl :formListagem:pnlDatatable" />
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		</ui:define>
+</ui:composition>
